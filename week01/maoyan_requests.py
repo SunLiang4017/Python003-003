@@ -23,19 +23,19 @@ def getData(url):
     print(f'电影名称: {film_name}')
 
     # 电影类型
-    film_category = selector.xpath('/html/body/div[3]/div/div[2]/div[1]/ul/li[1]/a[1]/text()')
+    film_category = selector.xpath('//div[@class="movie-brief-container"]/ul/li[1]/a[1]/text()')
     print(f'电影类型: {film_category}')
 
     # 上映时间
-    plan_date = selector.xpath('/html/body/div[3]/div/div[2]/div[1]/ul/li[3]/text()')
+    plan_date = selector.xpath('//div[@class="movie-brief-container"]/ul/li[3]/text()')
     print(f'上映时间: {plan_date}')
 
-    mylist = [film_name, plan_date, rating]
+    mylist = [film_name, film_category, plan_date]
 
     movie1 = pd.DataFrame(data = mylist)
 
     # windows需要使用gbk字符集
-    movie1.to_csv('./movie1.csv', encoding='utf8', index=False, header=False)
+    movie1.to_csv('./movie-requests.csv', encoding='utf8', index=False, header=False)
 
 
 myurl = 'https://maoyan.com/films?showType=3'
